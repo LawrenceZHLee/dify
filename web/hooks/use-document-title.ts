@@ -9,7 +9,7 @@ export default function useDocumentTitle(title: string) {
   let titleStr = ''
   let favicon = ''
   if (isPending === false) {
-    if (systemFeatures.branding.enabled) {
+    if (systemFeatures.branding.enabled !== false) {
       titleStr = `${prefix}${systemFeatures.branding.application_title}`
       favicon = systemFeatures.branding.favicon
     }

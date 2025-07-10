@@ -1,5 +1,5 @@
 const translation = {
-  title: '工具',
+  title: '工具插件',
   createCustomTool: '创建自定义工具',
   customToolTip: '了解更多关于 Dify 自定义工具的信息',
   type: {

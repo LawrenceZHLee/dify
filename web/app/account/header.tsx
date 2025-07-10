@@ -21,7 +21,7 @@ const Header = () => {
     <div className='flex flex-1 items-center justify-between px-4'>
       <div className='flex items-center gap-3'>
         <div className='flex cursor-pointer items-center' onClick={back}>
-          {systemFeatures.branding.enabled && systemFeatures.branding.login_page_logo
+          {systemFeatures.branding.enabled && false && systemFeatures.branding.login_page_logo
             ? <img
               src={systemFeatures.branding.login_page_logo}
               className='block h-[22px] w-auto object-contain'

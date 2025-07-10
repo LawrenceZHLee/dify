@@ -126,7 +126,7 @@ export default function AppSelector() {
                       </div>
                     </MenuItem>
                   </div>
-                  {!systemFeatures.branding.enabled && <>
+                  {!systemFeatures.branding.enabled && false && <>
                     <div className='p-1'>
                       <MenuItem>
                         <Link

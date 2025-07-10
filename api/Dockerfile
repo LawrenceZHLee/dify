@@ -6,7 +6,7 @@ WORKDIR /app/api
 # Install uv
 ENV UV_VERSION=0.7.11
 
-RUN pip install --no-cache-dir uv==${UV_VERSION}
+RUN pip install --no-cache-dir uv==${UV_VERSION}  -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
 
 
 FROM base AS packages
@@ -14,12 +14,14 @@ FROM base AS packages
 # if you located in China, you can use aliyun mirror to speed up
 # RUN sed -i 's@deb.debian.org@mirrors.aliyun.com@g' /etc/apt/sources.list.d/debian.sources
 
-RUN apt-get update \
+RUN sed -i 's/deb.debian.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list.d/debian.sources && \
+    sed -i 's/security.debian.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list.d/debian.sources && \
+    apt-get update \
     && apt-get install -y --no-install-recommends gcc g++ libc-dev libffi-dev libgmp-dev libmpfr-dev libmpc-dev
 
 # Install Python dependencies
 COPY pyproject.toml uv.lock ./
-RUN uv sync --locked
+RUN export UV_DEFAULT_INDEX="https://mirrors.aliyun.com/pypi/simple" && uv lock && uv sync --locked
 
 # production stage
 FROM base AS production
@@ -39,7 +41,8 @@ ENV TZ=UTC
 
 WORKDIR /app/api
 
-RUN \
+RUN sed -i 's/deb.debian.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list.d/debian.sources && \
+    sed -i 's/security.debian.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list.d/debian.sources && \
     apt-get update \
     # Install dependencies
     && apt-get install -y --no-install-recommends \

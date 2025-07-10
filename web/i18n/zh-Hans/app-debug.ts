@@ -103,7 +103,7 @@ const translation = {
       edit: '编辑标注',
     },
     dataSet: {
-      title: '知识库',
+      title: '知识融合工坊',
       noData: '您可以导入知识库作为上下文',
       words: '词',
       textBlocks: '文本块',

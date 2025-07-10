@@ -111,17 +111,17 @@ class PluginInstallationPermissionModel(BaseModel):
 class FeatureModel(BaseModel):
     billing: BillingModel = BillingModel()
     education: EducationModel = EducationModel()
-    members: LimitationModel = LimitationModel(size=0, limit=1)
-    apps: LimitationModel = LimitationModel(size=0, limit=10)
-    vector_space: LimitationModel = LimitationModel(size=0, limit=5)
+    members: LimitationModel = LimitationModel(size=0, limit=0)
+    apps: LimitationModel = LimitationModel(size=0, limit=0)
+    vector_space: LimitationModel = LimitationModel(size=0, limit=0)
     knowledge_rate_limit: int = 10
-    annotation_quota_limit: LimitationModel = LimitationModel(size=0, limit=10)
-    documents_upload_quota: LimitationModel = LimitationModel(size=0, limit=50)
+    annotation_quota_limit: LimitationModel = LimitationModel(size=0, limit=0)
+    documents_upload_quota: LimitationModel = LimitationModel(size=0, limit=0)
     docs_processing: str = "standard"
-    can_replace_logo: bool = False
-    model_load_balancing_enabled: bool = False
-    dataset_operator_enabled: bool = False
-    webapp_copyright_enabled: bool = False
+    can_replace_logo: bool = True
+    model_load_balancing_enabled: bool = True
+    dataset_operator_enabled: bool = True
+    webapp_copyright_enabled: bool = True
     workspace_members: LicenseLimitationModel = LicenseLimitationModel(enabled=False, size=0, limit=0)
 
     # pydantic configs
@@ -130,21 +130,21 @@ class FeatureModel(BaseModel):
 
 class KnowledgeRateLimitModel(BaseModel):
     enabled: bool = False
-    limit: int = 10
+    limit: int = 50
     subscription_plan: str = ""
 
 
 class SystemFeatureModel(BaseModel):
     sso_enforced_for_signin: bool = False
     sso_enforced_for_signin_protocol: str = ""
-    enable_marketplace: bool = False
+    enable_marketplace: bool = True
     max_plugin_package_size: int = dify_config.PLUGIN_MAX_PACKAGE_SIZE
-    enable_email_code_login: bool = False
+    enable_email_code_login: bool = True
     enable_email_password_login: bool = True
-    enable_social_oauth_login: bool = False
-    is_allow_register: bool = False
-    is_allow_create_workspace: bool = False
-    is_email_setup: bool = False
+    enable_social_oauth_login: bool = True
+    is_allow_register: bool = True
+    is_allow_create_workspace: bool = True
+    is_email_setup: bool = True
     license: LicenseModel = LicenseModel()
     branding: BrandingModel = BrandingModel()
     webapp_auth: WebAppAuthModel = WebAppAuthModel()
@@ -173,7 +173,7 @@ class FeatureService:
         if dify_config.BILLING_ENABLED and tenant_id:
             knowledge_rate_limit.enabled = True
             limit_info = BillingService.get_knowledge_rate_limit(tenant_id)
-            knowledge_rate_limit.limit = limit_info.get("limit", 10)
+            knowledge_rate_limit.limit = limit_info.get("limit", 50)
             knowledge_rate_limit.subscription_plan = limit_info.get("subscription_plan", "sandbox")
         return knowledge_rate_limit
 

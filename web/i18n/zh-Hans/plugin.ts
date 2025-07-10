@@ -1,6 +1,6 @@
 const translation = {
   metadata: {
-    title: '插件',
+    title: '插件仓库',
   },
   category: {
     all: '全部',

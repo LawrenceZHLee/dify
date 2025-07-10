@@ -14,13 +14,13 @@ class DeploymentConfig(BaseSettings):
 
     DEBUG: bool = Field(
         description="Enable debug mode for additional logging and development features",
-        default=False,
+        default=True,
     )
 
     # Request logging configuration
     ENABLE_REQUEST_LOGGING: bool = Field(
         description="Enable request and response body logging",
-        default=False,
+        default=True,
     )
 
     EDITION: str = Field(

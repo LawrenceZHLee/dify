@@ -154,7 +154,7 @@ const ProviderList = () => {
           {!filteredCollectionList.length && activeTab === 'builtin' && (
             <Empty lightCard text={t('tools.noTools')} className='h-[224px] px-12' />
           )}
-          {enable_marketplace && activeTab === 'builtin' && (
+          {enable_marketplace && false && activeTab === 'builtin' && (
             <Marketplace
               onMarketplaceScroll={() => {
                 containerRef.current?.scrollTo({ top: containerRef.current.scrollHeight, behavior: 'smooth' })

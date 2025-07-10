@@ -27,7 +27,7 @@ const getKey = (
   keywords: string,
 ) => {
   if (!pageIndex || previousPageData.has_more) {
-    const params: any = { url: 'apps', params: { page: pageIndex + 1, limit: 30, name: keywords } }
+    const params: any = { url: 'apps', params: { page: pageIndex + 1, limit: 500, name: keywords } }
 
     if (activeTab !== 'all')
       params.params.mode = activeTab

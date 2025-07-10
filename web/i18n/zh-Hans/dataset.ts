@@ -1,5 +1,5 @@
 const translation = {
-  knowledge: '知识库',
+  knowledge: '知识融合工坊',
   chunkingMode: {
     general: '通用',
     parentChild: '父子',

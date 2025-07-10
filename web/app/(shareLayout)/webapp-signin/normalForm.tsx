@@ -94,7 +94,7 @@ const NormalForm = () => {
       <div className="mx-auto mt-8 w-full">
         <div className="mx-auto w-full">
           <h2 className="title-4xl-semi-bold text-text-primary">{t('login.pageTitle')}</h2>
-          {!systemFeatures.branding.enabled && <p className='body-md-regular mt-2 text-text-tertiary'>{t('login.welcome')}</p>}
+          {!systemFeatures.branding.enabled && false && <p className='body-md-regular mt-2 text-text-tertiary'>{t('login.welcome')}</p>}
         </div>
         <div className="relative">
           <div className="mt-6 flex flex-col gap-3">
@@ -141,7 +141,7 @@ const NormalForm = () => {
               </div>
             </div>
           </>}
-          {!systemFeatures.branding.enabled && <>
+          {!systemFeatures.branding.enabled && false && <>
             <div className="system-xs-regular mt-2 block w-full text-text-tertiary">
               {t('login.tosDesc')}
               &nbsp;
