@@ -191,7 +191,7 @@ const ProviderList = () => {
             <Empty lightCard text={t('tools.noTools')} className='h-[224px] shrink-0 px-12' />
           )}
           <div ref={toolListTailRef} />
-          {enable_marketplace && activeTab === 'builtin' && (
+          {enable_marketplace && false && activeTab === 'builtin' && (
             <Marketplace
               searchPluginText={keywords}
               filterPluginTags={tagFilterValue}

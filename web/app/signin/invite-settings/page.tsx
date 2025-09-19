@@ -154,7 +154,7 @@ export default function InviteSettingsPage() {
         </Button>
       </div>
     </form>
-    {!systemFeatures.branding.enabled && <div className="system-xs-regular mt-2 block w-full text-text-tertiary">
+    {!systemFeatures.branding.enabled && false && <div className="system-xs-regular mt-2 block w-full text-text-tertiary">
       {t('login.license.tip')}
       &nbsp;
       <Link

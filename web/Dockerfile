@@ -26,7 +26,7 @@ COPY pnpm-lock.yaml .
 # Use packageManager from package.json
 RUN corepack install
 
-RUN pnpm install --frozen-lockfile
+RUN pnpm config set registry https://registry.npmmirror.com && pnpm install --frozen-lockfile
 
 # build resources
 FROM base AS builder

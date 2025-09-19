@@ -124,7 +124,7 @@ const CustomWebAppBrand = () => {
           onChange={handleSwitch}
         />
       </div>
-      <div className={cn('flex h-14 items-center justify-between rounded-xl bg-background-section-burn px-4', webappBrandRemoved && 'opacity-30')}>
+      <div className={cn('flex h-14 items-center justify-between rounded-xl bg-background-section-burn px-4', webappBrandRemoved && false  && 'opacity-30')}>
         <div>
           <div className='system-md-medium text-text-primary'>{t('custom.webapp.changeLogo')}</div>
           <div className='system-xs-regular text-text-tertiary'>{t('custom.webapp.changeLogoTip')}</div>
@@ -243,17 +243,17 @@ const CustomWebAppBrand = () => {
                 <RiEqualizer2Line className='h-4 w-4 text-text-tertiary' />
               </div>
               <div className='flex items-center gap-1.5'>
-                {!webappBrandRemoved && (
-                  <>
-                    <div className='system-2xs-medium-uppercase text-text-tertiary'>POWERED BY</div>
-                    {
-                      systemFeatures.branding.enabled && systemFeatures.branding.workspace_logo
-                        ? <img src={systemFeatures.branding.workspace_logo} alt='logo' className='block h-5 w-auto' />
-                        : webappLogo
-                          ? <img src={`${webappLogo}?hash=${imgKey}`} alt='logo' className='block h-5 w-auto' />
-                          : <DifyLogo size='small' />
-                    }
-                  </>
+                {!webappBrandRemoved && false  && (
+                  // <>
+                  //   <div className='system-2xs-medium-uppercase text-text-tertiary'>POWERED BY</div>
+                  //   {
+                  //     systemFeatures.branding.enabled && false && systemFeatures.branding.workspace_logo
+                  //       ? <img src={systemFeatures.branding.workspace_logo} alt='logo' className='block h-5 w-auto' />
+                  //       : webappLogo
+                  //         ? <img src={`${webappLogo}?hash=${imgKey}`} alt='logo' className='block h-5 w-auto' />
+                  //         : <DifyLogo size='small' />
+                  //   }
+                  // </>
                 )}
               </div>
             </div>
@@ -305,17 +305,17 @@ const CustomWebAppBrand = () => {
             </div>
           </div>
           <div className='flex h-12 shrink-0 items-center gap-1.5 bg-components-panel-bg p-4 pt-3'>
-            {!webappBrandRemoved && (
-              <>
-                <div className='system-2xs-medium-uppercase text-text-tertiary'>POWERED BY</div>
-                {
-                  systemFeatures.branding.enabled && systemFeatures.branding.workspace_logo
-                    ? <img src={systemFeatures.branding.workspace_logo} alt='logo' className='block h-5 w-auto' />
-                    : webappLogo
-                      ? <img src={`${webappLogo}?hash=${imgKey}`} alt='logo' className='block h-5 w-auto' />
-                      : <DifyLogo size='small' />
-                }
-              </>
+            {!webappBrandRemoved && false  && (
+              // <>
+              //   <div className='system-2xs-medium-uppercase text-text-tertiary'>POWERED BY</div>
+              //   {
+              //     systemFeatures.branding.enabled && false && systemFeatures.branding.workspace_logo
+              //       ? <img src={systemFeatures.branding.workspace_logo} alt='logo' className='block h-5 w-auto' />
+              //       : webappLogo
+              //         ? <img src={`${webappLogo}?hash=${imgKey}`} alt='logo' className='block h-5 w-auto' />
+              //         : <DifyLogo size='small' />
+              //   }
+              // </>
             )}
           </div>
         </div>

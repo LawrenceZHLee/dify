@@ -552,7 +552,7 @@ const TextGeneration: FC<IMainProps> = ({
         <div className={cn(
           'h-0 grow overflow-y-auto bg-components-panel-bg',
           isPC ? 'px-8' : 'px-4',
-          !isPC && resultExisted && customConfig?.remove_webapp_brand && 'rounded-b-2xl border-b-[0.5px] border-divider-regular',
+          !isPC && resultExisted && customConfig?.remove_webapp_brand && false  && 'rounded-b-2xl border-b-[0.5px] border-divider-regular',
         )}>
           <div className={cn(currentTab === 'create' ? 'block' : 'hidden')}>
             <RunOnce
@@ -584,7 +584,7 @@ const TextGeneration: FC<IMainProps> = ({
           )}
         </div>
         {/* powered by */}
-        {!customConfig?.remove_webapp_brand && (
+        {!customConfig?.remove_webapp_brand && false  && (
           <div className={cn(
             'flex shrink-0 items-center gap-1.5 bg-components-panel-bg py-3',
             isPC ? 'px-8' : 'px-4',
@@ -592,7 +592,7 @@ const TextGeneration: FC<IMainProps> = ({
           )}>
             <div className='system-2xs-medium-uppercase text-text-tertiary'>{t('share.chat.poweredBy')}</div>
             {
-              systemFeatures.branding.enabled && systemFeatures.branding.workspace_logo
+              systemFeatures.branding.enabled && false && systemFeatures.branding.workspace_logo
                 ? <img src={systemFeatures.branding.workspace_logo} alt='logo' className='block h-5 w-auto' />
                 : customConfig?.replace_webapp_logo
                   ? <img src={`${customConfig?.replace_webapp_logo}`} alt='logo' className='block h-5 w-auto' />

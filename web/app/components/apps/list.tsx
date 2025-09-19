@@ -232,7 +232,7 @@ const List = () => {
             <span className="system-xs-regular">{t('app.newApp.dropDSLToCreateApp')}</span>
           </div>
         )}
-        {!systemFeatures.branding.enabled && (
+        {!systemFeatures.branding.enabled && false && (
           <Footer />
         )}
         <CheckModal />
