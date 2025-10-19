@@ -133,13 +133,15 @@ class AppListApi(Resource):
     def post(self):
         """Create app"""
         current_user, current_tenant_id = current_account_with_tenant()
-        parser = reqparse.RequestParser()
-        parser.add_argument("name", type=str, required=True, location="json")
-        parser.add_argument("description", type=validate_description_length, location="json")
-        parser.add_argument("mode", type=str, choices=ALLOW_CREATE_APP_MODES, location="json")
-        parser.add_argument("icon_type", type=str, location="json")
-        parser.add_argument("icon", type=str, location="json")
-        parser.add_argument("icon_background", type=str, location="json")
+        parser = (
+            reqparse.RequestParser()
+            .add_argument("name", type=str, required=True, location="json")
+            .add_argument("description", type=validate_description_length, location="json")
+            .add_argument("mode", type=str, choices=ALLOW_CREATE_APP_MODES, location="json")
+            .add_argument("icon_type", type=str, location="json")
+            .add_argument("icon", type=str, location="json")
+            .add_argument("icon_background", type=str, location="json")
+        )
         args = parser.parse_args()
 
         if "mode" not in args or args["mode"] is None:
@@ -203,14 +205,16 @@ class AppApi(Resource):
     @marshal_with(app_detail_fields_with_site)
     def put(self, app_model):
         """Update app"""
-        parser = reqparse.RequestParser()
-        parser.add_argument("name", type=str, required=True, nullable=False, location="json")
-        parser.add_argument("description", type=validate_description_length, location="json")
-        parser.add_argument("icon_type", type=str, location="json")
-        parser.add_argument("icon", type=str, location="json")
-        parser.add_argument("icon_background", type=str, location="json")
-        parser.add_argument("use_icon_as_answer_icon", type=bool, location="json")
-        parser.add_argument("max_active_requests", type=int, location="json")
+        parser = (
+            reqparse.RequestParser()
+            .add_argument("name", type=str, required=True, nullable=False, location="json")
+            .add_argument("description", type=validate_description_length, location="json")
+            .add_argument("icon_type", type=str, location="json")
+            .add_argument("icon", type=str, location="json")
+            .add_argument("icon_background", type=str, location="json")
+            .add_argument("use_icon_as_answer_icon", type=bool, location="json")
+            .add_argument("max_active_requests", type=int, location="json")
+        )
         args = parser.parse_args()
 
         app_service = AppService()
@@ -278,12 +282,14 @@ class AppCopyApi(Resource):
         # The role of the current user in the ta table must be admin, owner, or editor
         current_user, _ = current_account_with_tenant()
 
-        parser = reqparse.RequestParser()
-        parser.add_argument("name", type=str, location="json")
-        parser.add_argument("description", type=validate_description_length, location="json")
-        parser.add_argument("icon_type", type=str, location="json")
-        parser.add_argument("icon", type=str, location="json")
-        parser.add_argument("icon_background", type=str, location="json")
+        parser = (
+            reqparse.RequestParser()
+            .add_argument("name", type=str, location="json")
+            .add_argument("description", type=validate_description_length, location="json")
+            .add_argument("icon_type", type=str, location="json")
+            .add_argument("icon", type=str, location="json")
+            .add_argument("icon_background", type=str, location="json")
+        )
         args = parser.parse_args()
 
         with Session(db.engine) as session:
@@ -331,9 +337,11 @@ class AppExportApi(Resource):
     def get(self, app_model):
         """Export app"""
         # Add include_secret params
-        parser = reqparse.RequestParser()
-        parser.add_argument("include_secret", type=inputs.boolean, default=False, location="args")
-        parser.add_argument("workflow_id", type=str, location="args")
+        parser = (
+            reqparse.RequestParser()
+            .add_argument("include_secret", type=inputs.boolean, default=False, location="args")
+            .add_argument("workflow_id", type=str, location="args")
+        )
         args = parser.parse_args()
 
         return {
@@ -357,8 +365,7 @@ class AppNameApi(Resource):
     @marshal_with(app_detail_fields)
     @edit_permission_required
     def post(self, app_model):
-        parser = reqparse.RequestParser()
-        parser.add_argument("name", type=str, required=True, location="json")
+        parser = reqparse.RequestParser().add_argument("name", type=str, required=True, location="json")
         args = parser.parse_args()
 
         app_service = AppService()
@@ -391,9 +398,11 @@ class AppIconApi(Resource):
     @marshal_with(app_detail_fields)
     @edit_permission_required
     def post(self, app_model):
-        parser = reqparse.RequestParser()
-        parser.add_argument("icon", type=str, location="json")
-        parser.add_argument("icon_background", type=str, location="json")
+        parser = (
+            reqparse.RequestParser()
+            .add_argument("icon", type=str, location="json")
+            .add_argument("icon_background", type=str, location="json")
+        )
         args = parser.parse_args()
 
         app_service = AppService()
@@ -421,8 +430,7 @@ class AppSiteStatus(Resource):
     @marshal_with(app_detail_fields)
     @edit_permission_required
     def post(self, app_model):
-        parser = reqparse.RequestParser()
-        parser.add_argument("enable_site", type=bool, required=True, location="json")
+        parser = reqparse.RequestParser().add_argument("enable_site", type=bool, required=True, location="json")
         args = parser.parse_args()
 
         app_service = AppService()
@@ -454,8 +462,7 @@ class AppApiStatus(Resource):
         if not current_user.is_admin_or_owner:
             raise Forbidden()
 
-        parser = reqparse.RequestParser()
-        parser.add_argument("enable_api", type=bool, required=True, location="json")
+        parser = reqparse.RequestParser().add_argument("enable_api", type=bool, required=True, location="json")
         args = parser.parse_args()
 
         app_service = AppService()
@@ -499,9 +506,11 @@ class AppTraceApi(Resource):
     @edit_permission_required
     def post(self, app_id):
         # add app trace
-        parser = reqparse.RequestParser()
-        parser.add_argument("enabled", type=bool, required=True, location="json")
-        parser.add_argument("tracing_provider", type=str, required=True, location="json")
+        parser = (
+            reqparse.RequestParser()
+            .add_argument("enabled", type=bool, required=True, location="json")
+            .add_argument("tracing_provider", type=str, required=True, location="json")
+        )
         args = parser.parse_args()
 
         OpsTraceManager.update_app_tracing_config(
