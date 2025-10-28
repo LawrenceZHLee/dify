@@ -243,18 +243,18 @@ const CustomWebAppBrand = () => {
                 <RiEqualizer2Line className='h-4 w-4 text-text-tertiary' />
               </div>
               <div className='flex items-center gap-1.5'>
-                {!webappBrandRemoved && false  && (
-                  // <>
-                  //   <div className='system-2xs-medium-uppercase text-text-tertiary'>POWERED BY</div>
-                  //   {
-                  //     systemFeatures.branding.enabled && false && systemFeatures.branding.workspace_logo
-                  //       ? <img src={systemFeatures.branding.workspace_logo} alt='logo' className='block h-5 w-auto' />
-                  //       : webappLogo
-                  //         ? <img src={`${webappLogo}?hash=${imgKey}`} alt='logo' className='block h-5 w-auto' />
-                  //         : <DifyLogo size='small' />
-                  //   }
-                  // </>
-                )}
+                {/* {!webappBrandRemoved && false  && (
+                  <>
+                    <div className='system-2xs-medium-uppercase text-text-tertiary'>POWERED BY</div>
+                    {
+                      systemFeatures.branding.enabled && false && systemFeatures.branding.workspace_logo
+                        ? <img src={systemFeatures.branding.workspace_logo} alt='logo' className='block h-5 w-auto' />
+                        : webappLogo
+                          ? <img src={`${webappLogo}?hash=${imgKey}`} alt='logo' className='block h-5 w-auto' />
+                          : <DifyLogo size='small' />
+                    }
+                  </>
+                )} */}
               </div>
             </div>
           </div>
