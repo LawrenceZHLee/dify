@@ -2,7 +2,7 @@
 DOCKER_REGISTRY=langgenius
 WEB_IMAGE=$(DOCKER_REGISTRY)/dify-web
 API_IMAGE=$(DOCKER_REGISTRY)/dify-api
-VERSION=local
+VERSION=1.9.2-local
 
 # Default target - show help
 .DEFAULT_GOAL := help
