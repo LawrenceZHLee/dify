@@ -83,7 +83,7 @@ export const defaultSystemFeatures: SystemFeatures = {
     expired_at: '',
   },
   branding: {
-    enabled: false,
+    enabled: true,
     login_page_logo: '',
     workspace_logo: '',
     favicon: '',

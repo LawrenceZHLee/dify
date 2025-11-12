@@ -265,7 +265,11 @@ class Tenant(TypeBase):
 
     @property
     def custom_config_dict(self) -> dict[str, Any]:
-        return json.loads(self.custom_config) if self.custom_config else {}
+        config = json.loads(self.custom_config) if self.custom_config else {}
+        # 设置默认值：从根源上移除 webapp 品牌
+        if "remove_webapp_brand" not in config:
+            config["remove_webapp_brand"] = True
+        return config
 
     @custom_config_dict.setter
     def custom_config_dict(self, value: dict[str, Any]) -> None:

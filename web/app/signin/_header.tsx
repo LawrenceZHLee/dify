@@ -10,10 +10,11 @@ import dynamic from 'next/dynamic'
 import { useGlobalPublicStore } from '@/context/global-public-context'
 
 // Avoid rendering the logo and theme selector on the server
-const DifyLogo = dynamic(() => import('@/app/components/base/logo/dify-logo'), {
-  ssr: false,
-  loading: () => <div className='h-7 w-16 bg-transparent' />,
-})
+// 从根源上设置：不显示登录页面左上角的 Dify logo
+// const DifyLogo = dynamic(() => import('@/app/components/base/logo/dify-logo'), {
+//   ssr: false,
+//   loading: () => <div className='h-7 w-16 bg-transparent' />,
+// })
 const ThemeSelector = dynamic(() => import('@/app/components/base/theme-selector'), {
   ssr: false,
   loading: () => <div className='size-8 bg-transparent' />,
@@ -25,13 +26,14 @@ const Header = () => {
 
   return (
     <div className='flex w-full items-center justify-between p-6'>
-      {systemFeatures.branding.enabled && systemFeatures.branding.login_page_logo
+      {/* 从根源上设置：不显示登录页面左上角的 Dify logo */}
+      {/* {systemFeatures.branding.enabled && systemFeatures.branding.login_page_logo
         ? <img
           src={systemFeatures.branding.login_page_logo}
           className='block h-7 w-auto object-contain'
           alt='logo'
         />
-        : <DifyLogo size='large' />}
+        : <DifyLogo size='large' />} */}
       <div className='flex items-center gap-1'>
         <LocaleSigninSelect
           value={locale}

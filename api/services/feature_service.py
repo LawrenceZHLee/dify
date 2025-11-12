@@ -70,7 +70,7 @@ class LicenseModel(BaseModel):
 
 
 class BrandingModel(BaseModel):
-    enabled: bool = False
+    enabled: bool = True
     application_title: str = ""
     login_page_logo: str = ""
     workspace_logo: str = ""
@@ -196,10 +196,12 @@ class FeatureService:
 
         cls._fulfill_system_params_from_env(system_features)
 
+        # 从根源上设置：确保 branding.enabled 始终为 True
+        system_features.branding.enabled = True
+
         if dify_config.ENTERPRISE_ENABLED:
-            system_features.branding.enabled = True
             system_features.webapp_auth.enabled = True
-            system_features.enable_change_email = False
+            system_features.enable_change_email = True
             system_features.plugin_manager.enabled = True
             cls._fulfill_params_from_enterprise(system_features)
 

@@ -44,7 +44,8 @@ const CustomWebAppBrand = () => {
   const isSandbox = enableBilling && plan.type === Plan.sandbox
   const uploading = uploadProgress > 0 && uploadProgress < 100
   const webappLogo = currentWorkspace.custom_config?.replace_webapp_logo || ''
-  const webappBrandRemoved = currentWorkspace.custom_config?.remove_webapp_brand
+  // 从根源上设置：如果未设置，默认移除品牌
+  const webappBrandRemoved = currentWorkspace.custom_config?.remove_webapp_brand ?? true
   const uploadDisabled = isSandbox || webappBrandRemoved || !isCurrentWorkspaceManager
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

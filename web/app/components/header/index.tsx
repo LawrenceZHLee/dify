@@ -6,7 +6,8 @@ import AppNav from './app-nav'
 import DatasetNav from './dataset-nav'
 import EnvNav from './env-nav'
 import PluginsNav from './plugins-nav'
-import ExploreNav from './explore-nav'
+// 从源头隐藏：探索按钮
+// import ExploreNav from './explore-nav'
 import ToolsNav from './tools-nav'
 import { WorkspaceProvider } from '@/context/workspace-context'
 import { useAppContext } from '@/context/app-context'
@@ -46,7 +47,7 @@ const Header = () => {
       <div className=''>
         <div className='flex items-center justify-between px-2'>
           <div className='flex items-center'>
-            <Link href="/apps" className='flex h-8 shrink-0 items-center justify-center px-0.5'>
+            {/* <Link href="/apps" className='flex h-8 shrink-0 items-center justify-center px-0.5'>
               {systemFeatures.branding.enabled && systemFeatures.branding.workspace_logo
                 ? <img
                   src={systemFeatures.branding.workspace_logo}
@@ -59,20 +60,22 @@ const Header = () => {
             <WorkspaceProvider>
               <WorkplaceSelector />
             </WorkspaceProvider>
-            {enableBilling ? <PlanBadge allowHover sandboxAsUpgrade plan={plan.type} onClick={handlePlanClick} /> : <LicenseNav />}
+            {enableBilling ? <PlanBadge allowHover sandboxAsUpgrade plan={plan.type} onClick={handlePlanClick} /> : <LicenseNav />} */}
           </div>
           <div className='flex items-center'>
-            <div className='mr-2'>
+            {/* <div className='mr-2'>
               <PluginsNav />
-            </div>
+            </div> */}
             <AccountDropdown />
           </div>
         </div>
         <div className='my-1 flex items-center justify-center space-x-1'>
-          {!isCurrentWorkspaceDatasetOperator && <ExploreNav className={navClassName} />}
+          {/* 从源头隐藏：探索按钮 */}
+          {/* {!isCurrentWorkspaceDatasetOperator && <ExploreNav className={navClassName} />} */}
           {!isCurrentWorkspaceDatasetOperator && <AppNav />}
           {(isCurrentWorkspaceEditor || isCurrentWorkspaceDatasetOperator) && <DatasetNav />}
           {!isCurrentWorkspaceDatasetOperator && <ToolsNav className={navClassName} />}
+          {!isCurrentWorkspaceDatasetOperator && <PluginsNav className={navClassName} />}
         </div>
       </div>
     )
@@ -81,7 +84,7 @@ const Header = () => {
   return (
     <div className='flex h-[56px] items-center'>
       <div className='flex min-w-0 flex-[1]  items-center pl-3 pr-2 min-[1280px]:pr-3'>
-        <Link href="/apps" className='flex h-8 shrink-0 items-center justify-center px-0.5'>
+        {/* <Link href="/apps" className='flex h-8 shrink-0 items-center justify-center px-0.5'>
           {systemFeatures.branding.enabled && systemFeatures.branding.workspace_logo
             ? <img
               src={systemFeatures.branding.workspace_logo}
@@ -94,19 +97,21 @@ const Header = () => {
         <WorkspaceProvider>
           <WorkplaceSelector />
         </WorkspaceProvider>
-        {enableBilling ? <PlanBadge allowHover sandboxAsUpgrade plan={plan.type} onClick={handlePlanClick} /> : <LicenseNav />}
+        {enableBilling ? <PlanBadge allowHover sandboxAsUpgrade plan={plan.type} onClick={handlePlanClick} /> : <LicenseNav />} */}
       </div>
       <div className='flex items-center space-x-2'>
-        {!isCurrentWorkspaceDatasetOperator && <ExploreNav className={navClassName} />}
+        {/* 从源头隐藏：探索按钮 */}
+        {/* {!isCurrentWorkspaceDatasetOperator && <ExploreNav className={navClassName} />} */}
         {!isCurrentWorkspaceDatasetOperator && <AppNav />}
         {(isCurrentWorkspaceEditor || isCurrentWorkspaceDatasetOperator) && <DatasetNav />}
         {!isCurrentWorkspaceDatasetOperator && <ToolsNav className={navClassName} />}
+        {!isCurrentWorkspaceDatasetOperator && <PluginsNav className={navClassName} />}
       </div>
       <div className='flex min-w-0 flex-[1] items-center justify-end pl-2 pr-3 min-[1280px]:pl-3'>
         <EnvNav />
-        <div className='mr-2'>
+        {/* <div className='mr-2'>
           <PluginsNav />
-        </div>
+        </div> */}
         <AccountDropdown />
       </div>
     </div>

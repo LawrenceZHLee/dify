@@ -545,12 +545,12 @@ class ModelLoadBalanceConfig(BaseSettings):
 
     MODEL_LB_ENABLED: bool = Field(
         description="Enable or disable load balancing for models",
-        default=False,
+        default=True,
     )
 
     PLUGIN_BASED_TOKEN_COUNTING_ENABLED: bool = Field(
         description="Enable or disable plugin based token counting. If disabled, token counting will return 0.",
-        default=False,
+        default=True,
     )
 
 

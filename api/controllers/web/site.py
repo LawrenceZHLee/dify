@@ -98,7 +98,8 @@ class AppSiteInfo:
 
         if can_replace_logo:
             base_url = dify_config.FILES_URL
-            remove_webapp_brand = tenant.custom_config_dict.get("remove_webapp_brand", False)
+            # 从根源上设置：custom_config_dict 已经包含默认值 remove_webapp_brand = True
+            remove_webapp_brand = tenant.custom_config_dict.get("remove_webapp_brand", True)
             replace_webapp_logo = (
                 f"{base_url}/files/workspaces/{tenant.id}/webapp-logo"
                 if tenant.custom_config_dict.get("replace_webapp_logo")

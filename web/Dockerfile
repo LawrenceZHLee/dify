@@ -1,5 +1,5 @@
 # base image
-FROM node:22-alpine3.21 AS base
+FROM node:22-alpine AS base
 LABEL maintainer="takatost@gmail.com"
 
 # if you located in China, you can use aliyun mirror to speed up
@@ -13,13 +13,12 @@ RUN corepack enable
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 ENV NEXT_PUBLIC_BASE_PATH=
-
+RUN pnpm config set registry https://registry.npmmirror.com
 
 # install packages
 FROM base AS packages
 
 WORKDIR /app/web
-
 COPY package.json .
 COPY pnpm-lock.yaml .
 
@@ -31,6 +30,7 @@ RUN pnpm install --frozen-lockfile
 # build resources
 FROM base AS builder
 WORKDIR /app/web
+
 COPY --from=packages /app/web/ .
 COPY . .
 

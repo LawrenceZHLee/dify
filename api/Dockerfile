@@ -4,7 +4,8 @@ FROM python:3.12-slim-bookworm AS base
 WORKDIR /app/api
 
 # Install uv
-ENV UV_VERSION=0.8.9
+ENV UV_VERSION=0.8.24
+RUN export UV_DEFAULT_INDEX="https://mirrors.aliyun.com/pypi/simple"
 
 RUN pip install --no-cache-dir uv==${UV_VERSION}
 
@@ -14,7 +15,9 @@ FROM base AS packages
 # if you located in China, you can use aliyun mirror to speed up
 # RUN sed -i 's@deb.debian.org@mirrors.aliyun.com@g' /etc/apt/sources.list.d/debian.sources
 
-RUN apt-get update \
+RUN sed -i 's/deb.debian.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list.d/debian.sources && \
+sed -i 's/security.debian.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list.d/debian.sources && \
+apt-get update \
     && apt-get install -y --no-install-recommends \
           # basic environment
           g++ \
@@ -23,7 +26,7 @@ RUN apt-get update \
 
 # Install Python dependencies
 COPY pyproject.toml uv.lock ./
-RUN uv sync --locked --no-dev
+RUN  uv lock && uv sync --locked --no-dev
 
 # production stage
 FROM base AS production
@@ -42,14 +45,16 @@ EXPOSE 5001
 ENV TZ=UTC
 
 # Set UTF-8 locale
-ENV LANG=en_US.UTF-8
-ENV LC_ALL=en_US.UTF-8
+ENV LANG=zh_CN.UTF-8
+ENV LC_ALL=zh_CN.UTF-8
 ENV PYTHONIOENCODING=utf-8
 
 WORKDIR /app/api
 
 RUN \
-    apt-get update \
+sed -i 's/deb.debian.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list.d/debian.sources && \
+sed -i 's/security.debian.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list.d/debian.sources && \
+apt-get update \
     # Install dependencies
     && apt-get install -y --no-install-recommends \
         # basic environment
