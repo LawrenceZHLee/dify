@@ -88,7 +88,9 @@ class Account(UserMixin, TypeBase):
     __tablename__ = "accounts"
     __table_args__ = (sa.PrimaryKeyConstraint("id", name="account_pkey"), sa.Index("account_email_idx", "email"))
 
-    id: Mapped[str] = mapped_column(StringUUID, default=lambda: str(uuid4()), init=False)
+    id: Mapped[str] = mapped_column(
+        StringUUID, insert_default=lambda: str(uuid4()), default_factory=lambda: str(uuid4()), init=False
+    )
     name: Mapped[str] = mapped_column(String(255))
     email: Mapped[str] = mapped_column(String(255))
     password: Mapped[str | None] = mapped_column(String(255), default=None)
@@ -235,7 +237,9 @@ class Tenant(TypeBase):
     __tablename__ = "tenants"
     __table_args__ = (sa.PrimaryKeyConstraint("id", name="tenant_pkey"),)
 
-    id: Mapped[str] = mapped_column(StringUUID, default=lambda: str(uuid4()), init=False)
+    id: Mapped[str] = mapped_column(
+        StringUUID, insert_default=lambda: str(uuid4()), default_factory=lambda: str(uuid4()), init=False
+    )
     name: Mapped[str] = mapped_column(String(255))
     encrypt_public_key: Mapped[str | None] = mapped_column(LongText, default=None)
     plan: Mapped[str] = mapped_column(String(255), server_default=sa.text("'basic'"), default="basic")
@@ -279,7 +283,9 @@ class TenantAccountJoin(TypeBase):
         sa.UniqueConstraint("tenant_id", "account_id", name="unique_tenant_account_join"),
     )
 
-    id: Mapped[str] = mapped_column(StringUUID, default=lambda: str(uuid4()), init=False)
+    id: Mapped[str] = mapped_column(
+        StringUUID, insert_default=lambda: str(uuid4()), default_factory=lambda: str(uuid4()), init=False
+    )
     tenant_id: Mapped[str] = mapped_column(StringUUID)
     account_id: Mapped[str] = mapped_column(StringUUID)
     current: Mapped[bool] = mapped_column(sa.Boolean, server_default=sa.text("false"), default=False)
@@ -301,7 +307,9 @@ class AccountIntegrate(TypeBase):
         sa.UniqueConstraint("provider", "open_id", name="unique_provider_open_id"),
     )
 
-    id: Mapped[str] = mapped_column(StringUUID, default=lambda: str(uuid4()), init=False)
+    id: Mapped[str] = mapped_column(
+        StringUUID, insert_default=lambda: str(uuid4()), default_factory=lambda: str(uuid4()), init=False
+    )
     account_id: Mapped[str] = mapped_column(StringUUID)
     provider: Mapped[str] = mapped_column(String(16))
     open_id: Mapped[str] = mapped_column(String(255))
@@ -352,7 +360,9 @@ class TenantPluginPermission(TypeBase):
         sa.UniqueConstraint("tenant_id", name="unique_tenant_plugin"),
     )
 
-    id: Mapped[str] = mapped_column(StringUUID, default=lambda: str(uuid4()), init=False)
+    id: Mapped[str] = mapped_column(
+        StringUUID, insert_default=lambda: str(uuid4()), default_factory=lambda: str(uuid4()), init=False
+    )
     tenant_id: Mapped[str] = mapped_column(StringUUID, nullable=False)
     install_permission: Mapped[InstallPermission] = mapped_column(
         String(16), nullable=False, server_default="everyone", default=InstallPermission.EVERYONE
@@ -379,7 +389,9 @@ class TenantPluginAutoUpgradeStrategy(TypeBase):
         sa.UniqueConstraint("tenant_id", name="unique_tenant_plugin_auto_upgrade_strategy"),
     )
 
-    id: Mapped[str] = mapped_column(StringUUID, default=lambda: str(uuid4()), init=False)
+    id: Mapped[str] = mapped_column(
+        StringUUID, insert_default=lambda: str(uuid4()), default_factory=lambda: str(uuid4()), init=False
+    )
     tenant_id: Mapped[str] = mapped_column(StringUUID, nullable=False)
     strategy_setting: Mapped[StrategySetting] = mapped_column(
         String(16), nullable=False, server_default="fix_only", default=StrategySetting.FIX_ONLY
