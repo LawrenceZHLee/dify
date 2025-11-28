@@ -2,7 +2,7 @@
 DOCKER_REGISTRY=langgenius
 WEB_IMAGE=$(DOCKER_REGISTRY)/dify-web
 API_IMAGE=$(DOCKER_REGISTRY)/dify-api
-VERSION=main-local
+VERSION=1.10.1-local
 
 # Default target - show help
 .DEFAULT_GOAL := help
@@ -38,7 +38,7 @@ prepare-api:
 
 # Clean dev environment
 dev-clean:
-	@echo "⚠️  Stopping Docker containers..."
+	@echo "� ️  Stopping Docker containers..."
 	@cd docker && docker compose -f docker-compose.middleware.yaml --env-file middleware.env -p dify-middlewares-dev down
 	@echo "🗑️  Removing volumes..."
 	@rm -rf docker/volumes/db
