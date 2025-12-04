@@ -21,7 +21,6 @@ FROM base AS packages
 WORKDIR /app/web
 
 COPY package.json pnpm-lock.yaml /app/web/
-COPY package.json pnpm-lock.yaml /app/web/
 
 # Use packageManager from package.json
 RUN corepack install
@@ -61,19 +60,6 @@ RUN ln -s /usr/share/zoneinfo/${TZ} /etc/localtime \
 # global runtime packages
 RUN pnpm add -g pm2
 
-
-# Create non-root user
-ARG dify_uid=1001
-RUN addgroup -S -g ${dify_uid} dify && \
-    adduser -S -u ${dify_uid} -G dify -s /bin/ash -h /home/dify dify && \
-    mkdir /app && \
-    mkdir /.pm2 && \
-    chown -R dify:dify /app /.pm2
-
-# global runtime packages
-RUN pnpm add -g pm2
-
-
 # Create non-root user
 ARG dify_uid=1001
 RUN addgroup -S -g ${dify_uid} dify && \
@@ -89,17 +75,11 @@ COPY --from=builder --chown=dify:dify /app/web/public ./public
 COPY --from=builder --chown=dify:dify /app/web/.next/standalone ./
 COPY --from=builder --chown=dify:dify /app/web/.next/static ./.next/static
 
-COPY --from=builder --chown=dify:dify /app/web/public ./public
-COPY --from=builder --chown=dify:dify /app/web/.next/standalone ./
-COPY --from=builder --chown=dify:dify /app/web/.next/static ./.next/static
-
-COPY --chown=dify:dify --chmod=755 docker/entrypoint.sh ./entrypoint.sh
 COPY --chown=dify:dify --chmod=755 docker/entrypoint.sh ./entrypoint.sh
 
 ARG COMMIT_SHA
 ENV COMMIT_SHA=${COMMIT_SHA}
 
-USER dify
 USER dify
 EXPOSE 3000
 ENTRYPOINT ["/bin/sh", "./entrypoint.sh"]

@@ -37,28 +37,12 @@ const Header = () => {
   const systemFeatures = useGlobalPublicStore(s => s.systemFeatures)
   const isFreePlan = plan.type === Plan.sandbox
   const isBrandingEnabled = systemFeatures.branding.enabled
-  const isBrandingEnabled = systemFeatures.branding.enabled
   const handlePlanClick = useCallback(() => {
     if (isFreePlan)
       setShowPricingModal()
     else
       setShowAccountSettingModal({ payload: ACCOUNT_SETTING_TAB.BILLING })
   }, [isFreePlan, setShowAccountSettingModal, setShowPricingModal])
-
-  const renderLogo = () => (
-    <h1>
-      <Link href="/apps" className='flex h-8 shrink-0 items-center justify-center px-0.5 indent-[-9999px]'>
-        {systemFeatures.branding.enabled && systemFeatures.branding.workspace_logo
-          ? <img
-            src={systemFeatures.branding.workspace_logo}
-            className='block h-[22px] w-auto object-contain'
-            alt='logo'
-          />
-          : <DifyLogo />}
-        {isBrandingEnabled && systemFeatures.branding.application_title ? systemFeatures.branding.application_title : 'dify'}
-      </Link>
-    </h1>
-  )
 
   const renderLogo = () => (
     <h1>
